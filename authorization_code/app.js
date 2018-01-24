@@ -89,13 +89,15 @@ app.get('/callback', function(req, res) {
       if (!error && response.statusCode === 200) {
 
         var access_token = body.access_token,
-            refresh_token = body.refresh_token;
+            refresh_token = body.refresh_token,
+            expires_in = body.expires_in;
 
         // we can also pass the token to the browser to make requests from there
         res.redirect(player_uri + '#' +
           querystring.stringify({
             access_token: access_token,
-            refresh_token: refresh_token
+            refresh_token: refresh_token,
+            expires_in: expires_in,
           }));
       } else {
         res.redirect(player_uri + '#' +
