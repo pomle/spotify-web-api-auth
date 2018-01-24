@@ -124,11 +124,14 @@ app.get('/refresh_token', function(req, res) {
   };
 
   request.post(authOptions, function(error, response, body) {
-    if (!error && response.statusCode === 200) {
-      var access_token = body.access_token;
-      res.send({
-        'access_token': access_token
-      });
+    if (error) {
+      console.error(error);
+    }
+
+    if (response.statusCode === 200) {
+      res.send(body);
+    } else {
+      console.error(body);
     }
   });
 });
